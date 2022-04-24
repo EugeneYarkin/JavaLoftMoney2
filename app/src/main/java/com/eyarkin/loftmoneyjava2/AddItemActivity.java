@@ -50,7 +50,6 @@ public class AddItemActivity extends AppCompatActivity {
                 }
                 }
 
-
             @Override
             public void afterTextChanged(Editable editable) {
                 if (!editable.toString().equals("")) {
