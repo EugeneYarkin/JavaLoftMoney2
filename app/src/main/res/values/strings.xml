@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">LoftMoneyJava2</string>
+    <string name="app_name" translatable="false">LoftMoney Java</string>
+    <string name="expense">Price</string>
+    <string name="income">Name</string>
+    <string name="add__button_text">Add</string>
+
 </resources>
