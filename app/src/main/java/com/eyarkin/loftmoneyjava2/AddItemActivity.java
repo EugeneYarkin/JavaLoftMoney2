@@ -19,13 +19,15 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_item);
 
         Button button = (Button)findViewById(R.id.add_button);
-        EditText textIncomes = findViewById(R.id.incomes_tv);
-        EditText textExpenses = findViewById(R.id.expenses_tv);
+        EditText textCost = findViewById(R.id.ed_cost);
+        EditText textName = findViewById(R.id.ed_name);
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textIncomes.setText("");
-                textExpenses.setText("");
+                textCost.setText("");
+                textName.setText("");
                 if (!flToast){
                     Toast.makeText(getApplicationContext(),
                             "Запрос отправлен!",
@@ -35,19 +37,14 @@ public class AddItemActivity extends AppCompatActivity {
 
             }
         });
-        textIncomes.addTextChangedListener(new TextWatcher() {
+        textCost.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (flToast){
-                    Toast.makeText(getApplicationContext(),
-                            "Данные введены!",
-                            Toast.LENGTH_SHORT).show();
-                    flToast=false;
-                }
+
                 }
 
             @Override
@@ -57,7 +54,15 @@ public class AddItemActivity extends AppCompatActivity {
                 } else {
                     button.setEnabled(false);
                 }
+                if (flToast){
+                    Toast.makeText(getApplicationContext(),
+                            "Данные введены!",
+                            Toast.LENGTH_SHORT).show();
+                    flToast=false;
+                }
             }
         });
     }
+
+
 }
