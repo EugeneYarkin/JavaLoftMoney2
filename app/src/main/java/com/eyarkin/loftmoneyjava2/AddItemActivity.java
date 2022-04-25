@@ -30,7 +30,7 @@ public class AddItemActivity extends AppCompatActivity {
                 textName.setText("");
                 if (!flToast){
                     Toast.makeText(getApplicationContext(),
-                            "Запрос отправлен!",
+                            R.string.request_sent,
                             Toast.LENGTH_SHORT).show();
                     flToast=true;
                 }
@@ -56,7 +56,7 @@ public class AddItemActivity extends AppCompatActivity {
                 }
                 if (flToast){
                     Toast.makeText(getApplicationContext(),
-                            "Данные введены!",
+                            R.string.data_entered,
                             Toast.LENGTH_SHORT).show();
                     flToast=false;
                 }

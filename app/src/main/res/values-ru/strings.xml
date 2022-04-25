@@ -2,5 +2,6 @@
     <string name="name">Название</string>
     <string name="cost">Цена</string>
     <string name="add__button_text">Добавить</string>
-
+    <string name="data_entered">Данные введены!</string>
+    <string name="request_sent">Запрос отправлен!</string>
 </resources>
