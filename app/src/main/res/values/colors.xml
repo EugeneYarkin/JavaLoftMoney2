@@ -11,4 +11,6 @@
 
     <color name="primary_color">#FF3574FA</color>
     <color name="accent_color">#FF7ED321</color>
+
+    <color name="expenseColor">#FFAAAAFA</color>
 </resources>
