@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/_WorkArea/Development/Android/LoftMoneyJava2/app/src/main/res/layout/activity_add_item.xml" value="0.19947916666666668" />
+        <entry key="..\:/_WorkArea/Development/Android/LoftMoneyJava2/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
+        <entry key="..\:/_WorkArea/Development/Android/LoftMoneyJava2/app/src/main/res/layout/cell_money.xml" value="0.19947916666666668" />
         <entry key="..\:/_WorkArea/Development/LoftMoneyJava2/app/src/main/res/drawable/ic_add_gray.xml" value="0.1" />
         <entry key="..\:/_WorkArea/Development/LoftMoneyJava2/app/src/main/res/drawable/ic_add_green.xml" value="0.1" />
         <entry key="..\:/_WorkArea/Development/LoftMoneyJava2/app/src/main/res/drawable/ic_add_grey.xml" value="0.1" />
