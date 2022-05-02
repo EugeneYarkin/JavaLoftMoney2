@@ -1,20 +1,28 @@
-package com.eyarkin.loftmoneyjava2.cells;
+package com.eyarkin.loftmoneyjava2.models;
 
+// Класс для данных которые мы потом будем отображать на экрана
 public class MoneyItem {
+    private String name;
+    private int amount;
 
-    private String title;
-    private String value;
-
-    public MoneyItem(String title, String value) {
-        this.title = title;
-        this.value = value;
+    public MoneyItem(final String name, final int amount) {
+        this.name = name;
+        this.amount = amount;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public String getValue() {
-        return value;
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(final int amount) {
+        this.amount = amount;
     }
 }
