@@ -11,25 +11,25 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.eyarkin.loftmoneyjava2.LoftApp"
+        android:name=".LoftApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.JavaLoftMoney2">
+        android:theme="@style/Theme.LoftMoneyJava">
         <!---> Так мы указываем активити <!-->
         <activity
-            android:name="com.eyarkin.loftmoneyjava2.presentation.main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="false">
 
         </activity>
         <activity
-            android:name="com.eyarkin.loftmoneyjava2.presentation.add_item.AddItemActivity"
+            android:name=".presentation.add_item.AddItemActivity"
             android:exported="false" />
 
         <activity
-            android:name="com.eyarkin.loftmoneyjava2.presentation.splash.SplashActivity"
+            android:name=".presentation.splash.SplashActivity"
             android:exported="true">
 
             <intent-filter>
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.eyarkin.loftmoneyjava2.presentation.login.LoginActivity" />
+        <activity android:name=".presentation.login.LoginActivity" />
     </application>
 
 </manifest>
