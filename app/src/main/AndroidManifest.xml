@@ -7,7 +7,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eyarkin.loftmoneyjava2">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="com.eyarkin.loftmoneyjava2.LoftApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,19 +20,27 @@
         android:theme="@style/Theme.JavaLoftMoney2">
         <!---> Так мы указываем активити <!-->
         <activity
-            android:name="com.eyarkin.loftmoneyjava2.MainActivity"
+            android:name="com.eyarkin.loftmoneyjava2.presentation.main.MainActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name="com.eyarkin.loftmoneyjava2.presentation.add_item.AddItemActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.eyarkin.loftmoneyjava2.presentation.splash.SplashActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <!---> Так мы указываем, что наше приложение стартует с MainActivity <!-->
+                <!---> Так мы указываем, что наше приложение стартует с SplashActivity <!-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.eyarkin.loftmoneyjava2.AddItemActivity"
-            android:exported="false">
-        </activity>
+
+        <activity android:name="com.eyarkin.loftmoneyjava2.presentation.login.LoginActivity" />
     </application>
 
 </manifest>

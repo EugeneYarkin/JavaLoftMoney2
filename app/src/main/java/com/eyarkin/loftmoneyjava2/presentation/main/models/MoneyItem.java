@@ -1,4 +1,6 @@
-package com.eyarkin.loftmoneyjava2.models;
+package com.eyarkin.loftmoneyjava2.presentation.main.models;
+
+import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
 
 // Класс для данных которые мы потом будем отображать на экрана
 public class MoneyItem {
@@ -25,4 +27,11 @@ public class MoneyItem {
     public void setAmount(final int amount) {
         this.amount = amount;
     }
+
+
+    public static MoneyItem getInstance(MoneyItemResponse moneyRemoteItem) {
+        return new MoneyItem(moneyRemoteItem.getName(), moneyRemoteItem.getPrice());
+    }
 }
+
+
