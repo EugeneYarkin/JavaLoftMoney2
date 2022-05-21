@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.main.models;
+package com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.models;
 
 import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
 
@@ -6,10 +6,21 @@ import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
 public class MoneyItem {
     private String name;
     private int amount;
+    private boolean isSelected;
+    private int id;
 
-    public MoneyItem(final String name, final int amount) {
+    public MoneyItem(final String name, final int amount, int id) {
         this.name = name;
         this.amount = amount;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,9 +39,16 @@ public class MoneyItem {
         this.amount = amount;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public static MoneyItem getInstance(MoneyItemResponse moneyRemoteItem) {
-        return new MoneyItem(moneyRemoteItem.getName(), moneyRemoteItem.getPrice());
+        return new MoneyItem(moneyRemoteItem.getName(), moneyRemoteItem.getPrice(), moneyRemoteItem.getId());
     }
 }
 

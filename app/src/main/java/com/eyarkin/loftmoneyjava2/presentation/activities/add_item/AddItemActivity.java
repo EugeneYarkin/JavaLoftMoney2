@@ -1,32 +1,37 @@
-package com.eyarkin.loftmoneyjava2.presentation.add_item;
+package com.eyarkin.loftmoneyjava2.presentation.activities.add_item;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.eyarkin.loftmoneyjava2.LoftApp;
 import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.main.fragment_budget.BudgetFragment;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.BudgetFragment;
 import com.eyarkin.loftmoneyjava2.remote.MoneyApi;
 import com.google.android.material.textfield.TextInputEditText;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+
+/**
+ * gjfdghdfgdfgdfgdfgdf
+ */
 
 public class AddItemActivity extends AppCompatActivity {
 
     private TextInputEditText nameEditText;
     private TextInputEditText amountEditText;
     private MoneyApi moneyApi;
+
+    private AddItemViewModel addItemViewModel;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -44,10 +49,25 @@ public class AddItemActivity extends AppCompatActivity {
         setTextWatcher(nameEditText, addButton);
         setTextWatcher(amountEditText, addButton);
 
+        addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
+        addItemViewModel.successAddItem.observe(this, isRequestSuccess -> {
+            if (isRequestSuccess) {
+                finish();
+            }
+        });
+
+        addItemViewModel.messageString.observe(this, error -> {
+            if (!error.isEmpty()) {
+                Toast.makeText(AddItemActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Находим тулбар (верхняя плашка на экране)
         Toolbar toolbar = findViewById(R.id.toolbar);
         // При нажатии на кнопочку "назад" вернёмся на предыдущий экран
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        ImageView buttonBack = findViewById(R.id.btn_back);
+        buttonBack.setOnClickListener(view -> onBackPressed());
 
         moneyApi = ((LoftApp) getApplication()).moneyApi;
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -59,21 +79,7 @@ public class AddItemActivity extends AppCompatActivity {
                 Bundle arguments = getIntent().getExtras();
                 String type = arguments.getString(BudgetFragment.TYPE);
                 String token = getSharedPreferences(getString(R.string.app_name), 0).getString(LoftApp.AUTH_KEY, "");
-                Disposable disposable = moneyApi.addItem(price, name, type, token)
-                        // Подписываем функцию на новый поток
-                        .subscribeOn(Schedulers.io())
-                        // Указываем на каком потоке будем получать данные из функции
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                () -> {
-                                    finish();
-                                },
-                                error -> {
-                                    Toast.makeText(getApplicationContext(), R.string.something_went_wrong, Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                        );
-                compositeDisposable.add(disposable);
+                addItemViewModel.addItem(moneyApi, name, price, type, token);
             }
         });
     }

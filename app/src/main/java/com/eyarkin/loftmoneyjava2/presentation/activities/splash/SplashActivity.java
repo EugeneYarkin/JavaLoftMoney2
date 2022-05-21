@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.splash;
+package com.eyarkin.loftmoneyjava2.presentation.activities.splash;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.eyarkin.loftmoneyjava2.LoftApp;
 import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.login.LoginActivity;
-import com.eyarkin.loftmoneyjava2.presentation.main.MainActivity;
+import com.eyarkin.loftmoneyjava2.presentation.activities.login.LoginActivity;
+import com.eyarkin.loftmoneyjava2.presentation.activities.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.login;
+package com.eyarkin.loftmoneyjava2.presentation.activities.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

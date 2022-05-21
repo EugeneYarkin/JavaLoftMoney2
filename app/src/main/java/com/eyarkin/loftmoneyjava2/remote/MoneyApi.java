@@ -1,6 +1,8 @@
 package com.eyarkin.loftmoneyjava2.remote;
 
+import com.eyarkin.loftmoneyjava2.remote.models.money.BalanceResponse;
 import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
+
 
 import java.util.List;
 
@@ -24,5 +26,13 @@ public interface MoneyApi {
                         @Field("name") String name,
                         @Field("type") String type,
                         @Field("auth-token") String token);
+
+    @POST("./items/remove")
+    @FormUrlEncoded
+    Completable remove(@Field("id") int id,
+                        @Field("auth-token") String token);
+
+    @GET("./balance")
+    Single<BalanceResponse> getBalance(@Query("auth-token") String token);
 
 }

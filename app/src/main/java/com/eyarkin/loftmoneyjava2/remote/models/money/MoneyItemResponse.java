@@ -2,16 +2,16 @@ package com.eyarkin.loftmoneyjava2.remote.models.money;
 
 public class MoneyItemResponse {
     private String date;
-    private String id;
+    private int id;
     private String name;
     private int price;
     private String type;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
