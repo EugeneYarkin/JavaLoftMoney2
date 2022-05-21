@@ -23,11 +23,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- *
- * gjfdghdfgdfgdfgdfgdf
- */
-
 public class AddItemActivity extends AppCompatActivity {
 
     private TextInputEditText nameEditText;
