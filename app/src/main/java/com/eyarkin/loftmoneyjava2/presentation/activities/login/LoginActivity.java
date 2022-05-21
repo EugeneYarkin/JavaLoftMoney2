@@ -1,10 +1,9 @@
-package com.eyarkin.loftmoneyjava2.presentation.login;
+package com.eyarkin.loftmoneyjava2.presentation.activities.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.eyarkin.loftmoneyjava2.LoftApp;
 import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.main.MainActivity;
+import com.eyarkin.loftmoneyjava2.presentation.activities.main.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

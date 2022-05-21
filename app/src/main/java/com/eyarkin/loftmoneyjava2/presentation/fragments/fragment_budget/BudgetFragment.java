@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.main.fragment_budget;
+package com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,22 +9,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.eyarkin.loftmoneyjava2.LoftApp;
 import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.main.EditModeListener;
-import com.eyarkin.loftmoneyjava2.presentation.main.models.MoneyItem;
-import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.EditModeListener;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.models.MoneyItem;
 
 // Фрагмент - часть пользовательского интерфейса, их может быть несколько на одном экране
 // не может существовать без activity, он к ней прикрепляется
@@ -46,11 +38,11 @@ public class BudgetFragment extends Fragment implements MoneyEditListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     // Мы создали этот метод, чтобы при создании фрагмента задавать ему параметры
-    public static BudgetFragment newInstance(final int colorId, final int typeId) {
+    public static BudgetFragment newInstance(final int colorId, final String typeId) {
         BudgetFragment budgetFragment = new BudgetFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(COLOR_ID, colorId);
-        bundle.putInt(TYPE, typeId);
+        bundle.putString(TYPE, typeId);
         budgetFragment.setArguments(bundle);
         return budgetFragment;
     }
@@ -63,7 +55,7 @@ public class BudgetFragment extends Fragment implements MoneyEditListener {
         if (getArguments() != null) {
             // Устанавливаем цвет для который положили в аргументы при создании фрагмента
             adapter = new MoneyItemsAdapter(getArguments().getInt(COLOR_ID));
-            type = getString(getArguments().getInt(TYPE));
+            type = getArguments().getString(TYPE);
         } else {
             adapter = new MoneyItemsAdapter(R.color.purple_500);
         }

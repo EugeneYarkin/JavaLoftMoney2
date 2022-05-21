@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.main.models;
+package com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.models;
 
 import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
 

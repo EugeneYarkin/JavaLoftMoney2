@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.main;
+package com.eyarkin.loftmoneyjava2.presentation.activities.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.add_item.AddItemActivity;
-import com.eyarkin.loftmoneyjava2.presentation.main.fragment_budget.BudgetFragment;
-import com.eyarkin.loftmoneyjava2.presentation.main.fragment_budget.MoneyEditListener;
+import com.eyarkin.loftmoneyjava2.presentation.activities.add_item.AddItemActivity;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.EditModeListener;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_balance.BalanceFragment;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.BudgetFragment;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.MoneyEditListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements EditModeListener 
 
     private static final int incomeFragmentPosition = 0;
     private static final int expenseFragmentPosition = 1;
+    private static final int balanceFragmentPosition = 2;
 
     // Один из методов жц активити
     // Здесь находим элементы из нашей верстки и навешиваем всяких setOnClickListener и подобное
@@ -48,22 +53,20 @@ public class MainActivity extends AppCompatActivity implements EditModeListener 
         // устанавливаем нашу разметку для этой активити
         setContentView(R.layout.activity_main);
 
+        // находим вью наших "вкладок"
+        TabLayout tabLayout = findViewById(R.id.tabs);
+
+        // инициализуруем пейджер, с помощью него будет листать фрагменты
+        viewPager = findViewById(R.id.viewpager);
+        // Устанавливаем адаптер, он будет управлять списком наших фрагментов
+        viewPager.setAdapter(new ViewPagerFragmentAdapter(this));
+
+
         configureActionMode();
-
-        configureViewPager();
-
-        configureAddItemButton();
-
-    }
-
-
-    private void configureAddItemButton() {
         // Находим кнопку
         addButton = findViewById(R.id.add_button);
         // Навешиваем на кнопку листенера для запуска активити добавления элемента в список
-
         Intent intent = new Intent(this, AddItemActivity.class);
-
         addButton.setOnClickListener(v -> {
             String type = "0";
             switch (currentFragmentPosition) {
@@ -75,30 +78,24 @@ public class MainActivity extends AppCompatActivity implements EditModeListener 
                     break;
             }
             intent.putExtra(BudgetFragment.TYPE, type);
-
             startActivity(intent);
         });
-    }
-
-    private void configureViewPager() {
-        // инициализуруем пейджер, с помощью него будет листать фрагменты
-        viewPager = findViewById(R.id.viewpager);
-        // Устанавливаем адаптер, он будет управлять списком наших фрагментов
-        viewPager.setAdapter(new ViewPagerFragmentAdapter(this));
-
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                if (position != currentFragmentPosition)
-                    closeEditMode();
+                closeEditMode();
                 currentFragmentPosition = position;
-
+                if (position == balanceFragmentPosition) {
+                    addButton.hide();
+                } else {
+                    addButton.show();
+                }
             }
         });
 
         //Здесь просто перечислим наши вкладки
-        final String[] fragmentsTitles = new String[]{getString(R.string.incomes), getString(R.string.expenses)};
+        final String[] fragmentsTitles = new String[]{getString(R.string.incomes), getString(R.string.expenses), getString(R.string.balance)};
 
         // Настраиваем наши вкладки, устанавливаем в них текст
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -112,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements EditModeListener 
     }
 
     private void configureActionMode() {
-        toolbar = findViewById(R.id.toolbar);
-        actionBack = findViewById(R.id.btn_back);
-        actionDelete = findViewById(R.id.iv_delete);
-        actionTitle = findViewById(R.id.tv_action_title);
+        toolbar = findViewById(R.id.toolbarView);
+        actionBack = findViewById(R.id.backButtonView);
+        actionDelete = findViewById(R.id.dashboardActionView);
+        actionTitle = findViewById(R.id.dashboardTitleView);
 
         actionBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,6 +190,38 @@ public class MainActivity extends AppCompatActivity implements EditModeListener 
         Fragment fragment = getSupportFragmentManager().getFragments().get(viewPager.getCurrentItem());
         if (fragment instanceof MoneyEditListener) {
             ((MoneyEditListener) fragment).onClearSelectedClick();
+        }
+    }
+
+    // Это обычный адаптер для управления списком, мы создавали адаптер раньше для RecyclerView
+    private class ViewPagerFragmentAdapter extends FragmentStateAdapter {
+
+        // Указываем конструктор для нашего адаптера
+        public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
+            super(fragmentActivity);
+        }
+
+        // Этот метод будет вызываться каждый раз когда мы будем переключать вкладки.
+        // Тут мы указываем на какой фрагмент нам стоит переключиться на i-ой вкладке(счёт с нуля)
+        @NonNull
+        @Override
+        public Fragment createFragment(int position) {
+            switch (position) {
+                case incomeFragmentPosition:
+                    return BudgetFragment.newInstance(R.color.income_color, getString(R.string.income));
+                case expenseFragmentPosition:
+                    return BudgetFragment.newInstance(R.color.expense_color, getString(R.string.expense));
+                case balanceFragmentPosition:
+                    return BalanceFragment.newInstance();
+                default:
+                    return null;
+            }
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return 3; // здесь указываем сколько у нас фрагментов
         }
     }
 

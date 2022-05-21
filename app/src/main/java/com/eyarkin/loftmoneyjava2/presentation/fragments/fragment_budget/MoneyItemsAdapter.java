@@ -1,4 +1,4 @@
-package com.eyarkin.loftmoneyjava2.presentation.main.fragment_budget;
+package com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget;
 
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.main.models.MoneyItem;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.models.MoneyItem;
 
 import java.util.ArrayList;
 import java.util.List;

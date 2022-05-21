@@ -1,15 +1,13 @@
-package com.eyarkin.loftmoneyjava2.presentation.main.fragment_budget;
+package com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget;
 
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.eyarkin.loftmoneyjava2.LoftApp;
-import com.eyarkin.loftmoneyjava2.R;
-import com.eyarkin.loftmoneyjava2.presentation.main.models.MoneyItem;
+import com.eyarkin.loftmoneyjava2.presentation.fragments.fragment_budget.models.MoneyItem;
 import com.eyarkin.loftmoneyjava2.remote.MoneyApi;
 import com.eyarkin.loftmoneyjava2.remote.models.money.MoneyItemResponse;
 
